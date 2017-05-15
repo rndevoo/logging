@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "commonjs",                     /* Specify module code generation: 'commonjs', 'amd', 'system', 'umd' or 'es2015'. */
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "rootDir": "./src/",
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "alwaysStrict": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "typeRoots": [],                       /* List of folders to include type definitions from. */
+    "types": [],                           /* Type declaration files to be included in compilation. */
+
+    "sourceRoot": "./",
+    "mapRoot": "./",
+    "inlineSourceMap": true,
+    "inlineSources": true,
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
