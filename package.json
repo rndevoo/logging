@@ -4,6 +4,7 @@
   "description": "rndevoo's logging microservice",
   "main": "src/server.js",
   "scripts": {
+    "lint": "tslint --fix src/server.ts",
     "copyenvfile": "scripts/gen_env_file"
   },
   "repository": "git@github.com:rndevoo/logging.git",
@@ -14,6 +15,9 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.5.1",
+    "@types/node": "^7.0.18",
+    "@types/winston": "^2.3.2",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "coveralls": "^2.13.1",
@@ -24,6 +28,7 @@
     "rimraf": "^2.6.1",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
+    "tslint": "^5.2.0",
     "typescript": "^2.3.2",
     "typings": "^2.1.1"
   },
