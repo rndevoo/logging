@@ -1,16 +1,35 @@
-import http from 'http';
+/**
+ * @overview
+ * The microservice's entry point.
+ *
+ * Here, we listen to messages in the logging queue and log them. Just that.
+ * But useful for centralized logging.
+ *
+ * @author Diego Stratta <strattadb@gmail>
+ * @license GPL-3.0
+ */
+
 import amqplib from 'amqplib';
 
 import logger from './config/winston';
 
-const PORT = process.env.PORT || 8090;
-const NODE_ENV: string = process.env.NODE_ENV || 'development';
 const AMQP_SERVER_URL: string = process.env.AMQP_SERVER_URL;
 
-const server: http.Server = http.createServer(() => {
+// First, we need to connect to the AMQP server.
+amqplib.connect(AMQP_SERVER_URL).then(async (conn) => {
+  const ch: amqplib.Channel = await conn.createChannel();
 
-});
+  // This is only queue we listen in this service.
+  const queue = 'logging';
 
-server.listen(PORT, () => {
-  logger.info(`Logging service running in ${NODE_ENV} mode on port ${PORT}`);
+  await ch.assertQueue(queue);
+
+  logger.info(`Waiting for messages in queue '${queue}...'`);
+  ch.consume(queue, (msg) => {
+    // It comes as a Buffer.
+    const data = JSON.parse(msg.content.toString());
+
+    // Log it away!
+    logger.log(data.level, `${data.service}: ${data.message}`);
+  });
 });
