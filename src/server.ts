@@ -25,7 +25,7 @@ amqplib.connect(AMQP_SERVER_URL).then(async (conn) => {
   await ch.assertQueue(queue);
 
   logger.info(`Waiting for messages in queue '${queue}...'`);
-  ch.consume(queue, (msg) => {
+  ch.consume(queue, (msg: any) => {
     // It comes as a Buffer.
     const data = JSON.parse(msg.content.toString());
 
