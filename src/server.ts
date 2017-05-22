@@ -9,9 +9,19 @@
  * @license GPL-3.0
  */
 
-import amqplib from 'amqplib';
+import * as dotenv from 'dotenv';
+
+const NODE_ENV = process.env.NODE_ENV;
+// Load environmental variables if not running in production.
+if (NODE_ENV !== 'production') {
+  dotenv.config({ path: '../.env'});
+}
+
+import * as amqplib from 'amqplib';
 
 import logger from './config/winston';
+
+
 
 const AMQP_SERVER_URL: string = process.env.AMQP_SERVER_URL;
 
@@ -20,12 +30,12 @@ amqplib.connect(AMQP_SERVER_URL).then(async (conn) => {
   const ch: amqplib.Channel = await conn.createChannel();
 
   // This is only queue we listen in this service.
-  const queue = 'logging';
+  const loggingQueue = 'logging';
+  ch.assertQueue(loggingQueue);
 
-  await ch.assertQueue(queue);
+  logger.info(`Waiting for messages in queue '${loggingQueue}...'`);
 
-  logger.info(`Waiting for messages in queue '${queue}...'`);
-  ch.consume(queue, (msg: any) => {
+  ch.consume(loggingQueue, (msg: any) => {
     // It comes as a Buffer.
     const data = JSON.parse(msg.content.toString());
 
