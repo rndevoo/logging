@@ -23,8 +23,6 @@
 
     "sourceRoot": "./",
     "mapRoot": "./",
-    "inlineSourceMap": true,
-    "inlineSources": true,
 
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
