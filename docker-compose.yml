@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: yarn run dev
+    ports:
+      - "8082:8080"
+    volumes:
+      - .:/usr/src/app
+
+networks:
+  rndevoo:
+    external:
+      name: rndevoo_network
