@@ -4,7 +4,13 @@
   "description": "rndevoo's logging microservice",
   "main": "src/server.js",
   "scripts": {
-    "lint": "tslint --fix src/server.ts",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "build": "tsc",
+    "dev": "nodemon -e ts --exec ts-node src/server.ts",
+    "preprod": "npm run build",
+    "prod": "node dist/server.js",
+    "lint": "tslint --fix src",
     "copyenvfile": "scripts/gen_env_file"
   },
   "repository": "git@github.com:rndevoo/logging.git",
@@ -16,6 +22,7 @@
   },
   "devDependencies": {
     "@types/amqplib": "^0.5.1",
+    "@types/dotenv": "^4.0.0",
     "@types/node": "^7.0.18",
     "@types/winston": "^2.3.2",
     "chai": "^3.5.0",
@@ -28,9 +35,9 @@
     "rimraf": "^2.6.1",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
+    "ts-node": "^3.0.4",
     "tslint": "^5.2.0",
-    "typescript": "^2.3.2",
-    "typings": "^2.1.1"
+    "typescript": "^2.3.2"
   },
   "engines": {
     "node": ">=7.10.0"
