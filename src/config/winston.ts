@@ -1,4 +1,8 @@
-import winston from 'winston';
+/**
+ * @overview
+ * Winston (our logger) configuration.
+ */
+import * as winston from 'winston';
 
 const LOG_LEVEL: string = process.env.LOG_LEVEL;
 
