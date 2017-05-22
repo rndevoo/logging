@@ -7,8 +7,12 @@ services:
       - "8082:8080"
     volumes:
       - .:/usr/src/app
+    networks:
+      rndevoo_network:
+        aliases:
+          - logging
 
 networks:
-  rndevoo:
+  rndevoo_network:
     external:
       name: rndevoo_network
