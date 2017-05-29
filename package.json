@@ -25,7 +25,7 @@
     "@types/dotenv": "^4.0.0",
     "@types/node": "^7.0.18",
     "@types/winston": "^2.3.2",
-    "chai": "^3.5.0",
+    "chai": "^4.0.0",
     "chai-as-promised": "^6.0.0",
     "coveralls": "^2.13.1",
     "dotenv": "^4.0.0",
