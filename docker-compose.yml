@@ -11,6 +11,7 @@ services:
       rndevoo_network:
         aliases:
           - logging
+    env_file: .env
 
 networks:
   rndevoo_network:
