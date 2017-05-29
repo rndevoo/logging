@@ -13,6 +13,8 @@ import * as amqplib from 'amqplib';
 
 import logger from './config/winston';
 
+import log from './handlers/log';
+
 const RABBITMQ_SERVER_URL = process.env.RABBITMQ_SERVER_URL;
 
 /**
@@ -35,13 +37,7 @@ async function main () {
 
   logger.info(`Waiting for messages in queue '${loggingQueue}...'`);
 
-  ch.consume(loggingQueue, async (msg: amqplib.Message) => {
-    // The data comes as a Buffer.
-    const data = JSON.parse(msg.content.toString());
-
-    // Log it away!
-    logger.log(data.level, `${data.service}: ${data.message}`);
-  });
+  ch.consume(loggingQueue, log);
 }
 
 main();
