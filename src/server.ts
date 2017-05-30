@@ -13,7 +13,7 @@ import * as amqplib from 'amqplib';
 
 import logger from './config/winston';
 
-import log from './handlers/log';
+import logHandler from './handlers/log';
 
 const RABBITMQ_SERVER_URL = process.env.RABBITMQ_SERVER_URL;
 
@@ -37,7 +37,7 @@ async function main () {
 
   logger.info(`Waiting for messages in queue '${loggingQueue}...'`);
 
-  ch.consume(loggingQueue, log);
+  ch.consume(loggingQueue, logHandler);
 }
 
 main();
